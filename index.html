@@ -1,13 +1,75 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr-FR">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-    <title>Premium Electronique – PC, Smartphones & Appareils photo</title>
+    
+    <!-- ========== SEO ULTRA SOPHISTIQUÉ (FRANCE & BELGIQUE) ========== -->
+    <title>Premium Électronique | PC, Smartphones & Appareils Photo – France & Belgique</title>
+    <meta name="description" content="Achetez vos équipements high-tech au meilleur prix en France et en Belgique. Sélection de PC portables, iPhones, smartphones Android et appareils photo avec livraison rapide." />
+    <meta name="keywords" content="e-commerce high-tech france, achat smartphone belgique, pc portable france, iphone pas cher belgique, appareil photo sony canon, livraison high tech bruxelles paris" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://premium-electronique.com/" />
+
+    <!-- Hreflang pour le ciblage France & Belgique -->
+    <link rel="alternate" hreflang="fr-FR" href="https://premium-electronique.com/" />
+    <link rel="alternate" hreflang="fr-BE" href="https://premium-electronique.com/be-fr/" />
+    <link rel="alternate" hreflang="nl-BE" href="https://premium-electronique.com/be-nl/" />
+    <link rel="alternate" hreflang="x-default" href="https://premium-electronique.com/" />
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale:alternate" content="fr_BE" />
+    <meta property="og:title" content="Premium Électronique – High-Tech en France & Belgique" />
+    <meta property="og:description" content="Découvrez les derniers smartphones, ordinateurs et appareils photo. Commandez en toute sécurité avec livraison en France et Belgique." />
+    <meta property="og:url" content="https://premium-electronique.com/" />
+    <meta property="og:site_name" content="Premium Électronique" />
+    <meta property="og:image" content="https://premium-electronique.com/og-cover.jpg" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Premium Électronique – High-Tech France & Belgique" />
+    <meta name="twitter:description" content="Commandez votre matériel high-tech livré rapidement chez vous en France ou en Belgique." />
+
+    <!-- Geo-Targeting FR & BE -->
+    <meta name="geo.region" content="FR;BE" />
+    <meta name="geo.placename" content="Paris; Bruxelles" />
+
+    <!-- DONNÉES STRUCTURÉES SCHEMA.ORG (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ElectronicsStore",
+      "name": "Premium Électronique",
+      "image": "https://premium-electronique.com/og-cover.jpg",
+      "description": "Boutique en ligne spécialisée dans la vente de smartphones, ordinateurs portables et matériel photo pour la France et la Belgique.",
+      "currenciesAccepted": "EUR",
+      "paymentAccepted": "Bank Transfer, Credit Card",
+      "priceRange": "€€-€€€",
+      "areaServed": [
+        { "@type": "Country", "name": "France" },
+        { "@type": "Country", "name": "Belgium" }
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "infopreniumelectronique@gmail.com",
+        "contactType": "customer service",
+        "availableLanguage": ["French", "Dutch", "English"]
+      }
+    }
+    </script>
+    
+    <!-- Pré-connexions pour un chargement ultra-rapide -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://gvfwetjrsnjvjpyhipqg.supabase.co" crossorigin />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
+
     <style>
         /* ========== PALETTE : VERT FORÊT + PÊCHE ========== */
         :root {
@@ -31,13 +93,26 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
+
+        input, textarea, select {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
+            font-display: swap;
         }
 
         header {
@@ -59,16 +134,9 @@
             align-items: center;
             gap: 0.4rem;
             cursor: pointer;
-            user-select: none;
         }
-        .logo i {
-            color: var(--accent);
-        }
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
+        .logo i { color: var(--accent); }
+        .header-actions { display: flex; align-items: center; gap: 0.8rem; }
         .support-btn {
             background: transparent;
             border: 1.5px solid rgba(255, 255, 255, 0.3);
@@ -150,9 +218,7 @@
             letter-spacing: -0.02em;
             position: relative;
         }
-        .hero h1 i {
-            color: var(--accent);
-        }
+        .hero h1 i { color: var(--accent); }
         .hero p {
             font-size: 1.15rem;
             opacity: 0.9;
@@ -212,6 +278,8 @@
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(209, 224, 211, 0.3);
+            content-visibility: auto;
+            contain-intrinsic-size: 350px;
         }
         .product-card:hover {
             transform: translateY(-8px);
@@ -231,9 +299,7 @@
             object-fit: contain;
             transition: transform 0.5s;
         }
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
-        }
+        .product-card:hover .product-image img { transform: scale(1.05); }
         .product-info {
             padding: 1.2rem 1.2rem 1.5rem;
             flex: 1;
@@ -346,12 +412,7 @@
         .cart-item-info { flex: 1; min-width: 100px; }
         .cart-item-name { font-weight: 500; font-size: 0.95rem; color: var(--primary); }
         .cart-item-price { font-size: 0.85rem; color: var(--muted); }
-        .cart-item-actions {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
+        .cart-item-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
         .cart-item-actions button {
             background: #f1f5f1;
             border: none;
@@ -443,11 +504,7 @@
             visibility: hidden;
             transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
         }
-        .payment-modal.open {
-            opacity: 1;
-            visibility: visible;
-            transform: translate(-50%, -50%) scale(1);
-        }
+        .payment-modal.open { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
         .payment-modal h2 {
             font-size: 1.7rem;
             margin-bottom: 0.5rem;
@@ -495,11 +552,7 @@
             line-height: 1.6;
         }
         .payment-modal .bank-details strong { color: var(--primary); }
-        .upload-section {
-            margin: 1rem 0 1.2rem;
-            border-top: 2px dashed var(--border);
-            padding-top: 1rem;
-        }
+        .upload-section { margin: 1rem 0 1.2rem; border-top: 2px dashed var(--border); padding-top: 1rem; }
         .upload-section label {
             font-weight: 600;
             display: block;
@@ -507,11 +560,7 @@
             font-size: 0.9rem;
             color: var(--primary);
         }
-        .upload-section .helper {
-            font-size: 0.8rem;
-            color: var(--muted);
-            margin-bottom: 0.6rem;
-        }
+        .upload-section .helper { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.6rem; }
         .upload-section input[type="file"] {
             display: block;
             width: 100%;
@@ -523,10 +572,7 @@
             transition: var(--transition);
             font-size: 0.85rem;
         }
-        .upload-section input[type="file"]:hover {
-            border-color: var(--primary);
-            background: #f0fdf4;
-        }
+        .upload-section input[type="file"]:hover { border-color: var(--primary); background: #f0fdf4; }
         .upload-section .preview-container {
             margin-top: 0.6rem;
             display: flex;
@@ -541,11 +587,7 @@
             border: 1px solid var(--border);
             object-fit: cover;
         }
-        .upload-section .preview-container .file-name {
-            font-size: 0.8rem;
-            color: var(--muted);
-            word-break: break-all;
-        }
+        .upload-section .preview-container .file-name { font-size: 0.8rem; color: var(--muted); word-break: break-all; }
         .payment-modal .close-payment-btn {
             background: var(--accent);
             color: var(--primary-dark);
@@ -595,12 +637,7 @@
         footer span { color: white; }
 
         /* ===== ADMIN STYLES ===== */
-        #adminPanel {
-            display: none;
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
+        #adminPanel { display: none; max-width: 1400px; margin: 2rem auto; padding: 0 1rem; }
         #adminPanel.active { display: block; }
         .admin-header {
             display: flex;
@@ -610,11 +647,7 @@
             flex-wrap: wrap;
             gap: 1rem;
         }
-        .admin-header h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
+        .admin-header h2 { font-size: 2rem; font-weight: 700; color: var(--primary); }
         .admin-header .btn-back {
             background: var(--accent);
             color: var(--primary-dark);
@@ -638,11 +671,7 @@
             box-shadow: var(--shadow);
             margin-bottom: 2rem;
         }
-        .admin-settings h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
+        .admin-settings h3 { font-size: 1.2rem; margin-bottom: 1rem; color: var(--primary); }
         .admin-settings .settings-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -663,10 +692,7 @@
             font-size: 0.9rem;
             transition: var(--transition);
         }
-        .admin-settings .settings-grid input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
+        .admin-settings .settings-grid input:focus { outline: none; border-color: var(--primary); }
         .admin-settings .save-settings-btn {
             margin-top: 1rem;
             background: var(--primary);
@@ -680,17 +706,8 @@
         }
         .admin-settings .save-settings-btn:hover { background: var(--accent); color: var(--primary-dark); }
 
-        .admin-products {
-            background: white;
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-        }
-        .admin-products h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
+        .admin-products { background: white; border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); }
+        .admin-products h3 { font-size: 1.2rem; margin-bottom: 1rem; color: var(--primary); }
         .admin-product-item {
             display: grid;
             grid-template-columns: 80px 1fr 1fr 100px 120px 140px auto;
@@ -707,23 +724,15 @@
             border-radius: 8px;
             background: #f1f5f1;
         }
-        .admin-product-item input,
-        .admin-product-item select {
+        .admin-product-item input, .admin-product-item select {
             padding: 0.3rem 0.5rem;
             border: 1.5px solid var(--border);
             border-radius: 6px;
             font-size: 0.85rem;
             width: 100%;
         }
-        .admin-product-item input:focus,
-        .admin-product-item select:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        .admin-product-item .admin-file-input {
-            font-size: 0.75rem;
-            padding: 0.2rem;
-        }
+        .admin-product-item input:focus, .admin-product-item select:focus { outline: none; border-color: var(--primary); }
+        .admin-product-item .admin-file-input { font-size: 0.75rem; padding: 0.2rem; }
         .admin-product-item .admin-save-product {
             background: var(--primary);
             color: white;
@@ -767,11 +776,7 @@
             visibility: hidden;
             transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
         }
-        .admin-login-modal.open {
-            opacity: 1;
-            visibility: visible;
-            transform: translate(-50%, -50%) scale(1);
-        }
+        .admin-login-modal.open { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
         .admin-login-modal h2 {
             font-size: 1.4rem;
             margin-bottom: 0.5rem;
@@ -780,12 +785,7 @@
             gap: 0.5rem;
             color: var(--primary);
         }
-        .admin-login-modal label {
-            display: block;
-            margin-top: 1rem;
-            font-weight: 500;
-            color: var(--muted);
-        }
+        .admin-login-modal label { display: block; margin-top: 1rem; font-weight: 500; color: var(--muted); }
         .admin-login-modal input {
             width: 100%;
             padding: 0.6rem;
@@ -794,10 +794,7 @@
             margin-top: 0.2rem;
             font-size: 0.9rem;
         }
-        .admin-login-modal input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
+        .admin-login-modal input:focus { outline: none; border-color: var(--primary); }
         .admin-login-modal .login-btn {
             margin-top: 1.5rem;
             background: var(--primary);
@@ -812,12 +809,7 @@
             font-size: 1rem;
         }
         .admin-login-modal .login-btn:hover { background: var(--accent); color: var(--primary-dark); }
-        .admin-login-modal .login-error {
-            color: #e76f51;
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
-            display: none;
-        }
+        .admin-login-modal .login-error { color: #e76f51; font-size: 0.85rem; margin-top: 0.5rem; display: none; }
         .admin-login-modal .login-error.show { display: block; }
         .admin-login-modal .close-login {
             position: absolute;
@@ -838,39 +830,18 @@
             .support-btn { font-size: 0.7rem; padding: 0.2rem 0.6rem; }
             .cart-icon { width: 40px; height: 40px; font-size: 1.4rem; }
             .hero h1 { font-size: 1.8rem; }
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                gap: 1rem;
-            }
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
             .product-image { height: 140px; }
             .product-name { font-size: 0.85rem; min-height: 2.2rem; }
             .product-price { font-size: 1.1rem; }
             .add-to-cart { font-size: 0.75rem; min-height: 38px; }
             .cart-sidebar { width: 100%; right: -100%; padding: 1rem; }
             .payment-modal { padding: 1.2rem; width: 95%; }
-            .admin-product-item {
-                grid-template-columns: 1fr 1fr;
-                gap: 0.5rem;
-                padding: 1rem 0;
-            }
-            .admin-product-item .admin-img-preview {
-                grid-column: 1 / -1;
-                width: 80px;
-                height: 80px;
-                margin: 0 auto;
-            }
-            .admin-product-item input,
-            .admin-product-item select {
-                width: 100%;
-            }
-            .admin-product-item .admin-save-product,
-            .admin-product-item .admin-remove-product {
-                width: 100%;
-                justify-self: stretch;
-            }
-            .admin-settings .settings-grid {
-                grid-template-columns: 1fr;
-            }
+            .admin-product-item { grid-template-columns: 1fr 1fr; gap: 0.5rem; padding: 1rem 0; }
+            .admin-product-item .admin-img-preview { grid-column: 1 / -1; width: 80px; height: 80px; margin: 0 auto; }
+            .admin-product-item input, .admin-product-item select { width: 100%; }
+            .admin-product-item .admin-save-product, .admin-product-item .admin-remove-product { width: 100%; justify-self: stretch; }
+            .admin-settings .settings-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 420px) {
             .products-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
@@ -879,25 +850,11 @@
             .product-price { font-size: 0.95rem; }
             .add-to-cart { font-size: 0.65rem; min-height: 34px; }
         }
-        .loading-spinner {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 3rem 0;
-            color: var(--muted);
-        }
-        .loading-spinner i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            display: block;
-            color: var(--primary);
-        }
+        .loading-spinner { grid-column: 1 / -1; text-align: center; padding: 3rem 0; color: var(--muted); }
+        .loading-spinner i { font-size: 2rem; margin-bottom: 0.5rem; display: block; color: var(--primary); }
 
         /* ===== DELIVERY SECTION ===== */
-        .delivery-section {
-            margin: 1rem 0 1.2rem;
-            border-bottom: 2px dashed var(--border);
-            padding-bottom: 1rem;
-        }
+        .delivery-section { margin: 1rem 0 1.2rem; border-bottom: 2px dashed var(--border); padding-bottom: 1rem; }
         .delivery-section h3 {
             font-size: 1.1rem;
             font-weight: 600;
@@ -923,17 +880,11 @@
             background: white;
             box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.1);
         }
-        .delivery-section .row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.5rem;
-        }
-        @media (max-width: 700px) {
-            .delivery-section .row { grid-template-columns: 1fr; }
-        }
+        .delivery-section .row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+        @media (max-width: 700px) { .delivery-section .row { grid-template-columns: 1fr; } }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
     <!-- ========== HEADER ========== -->
     <header>
@@ -953,12 +904,12 @@
 
     <!-- ========== HERO ========== -->
     <section class="hero" id="heroSection">
-        <h1><i class="fas fa-bolt"></i> Premium Electronique</h1>
-        <p>Les derniers PC, smartphones et appareils photo – en exclusivité chez Premium Electronique.</p>
+        <h1><i class="fas fa-bolt"></i> Premium Électronique</h1>
+        <p>Les derniers PC, smartphones et appareils photo – Livrés rapidement en France & Belgique.</p>
     </section>
 
     <!-- ========== SHOP ========== -->
-    <div class="shop-container" id="shopContainer">
+    <main class="shop-container" id="shopContainer">
         <div class="categories" id="categories">
             <button class="active" data-category="all">Tous</button>
             <button data-category="pc">PC</button>
@@ -972,11 +923,11 @@
                 Chargement des produits…
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- ========== CART SIDEBAR ========== -->
     <div class="overlay" id="overlay"></div>
-    <div class="cart-sidebar" id="cartSidebar">
+    <aside class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
             <h2><i class="fas fa-shopping-bag"></i> Panier</h2>
             <button class="close-cart" id="closeCart">&times;</button>
@@ -989,14 +940,14 @@
         <button class="checkout-btn" id="checkoutBtn">
             <i class="fas fa-credit-card"></i> Passer à la caisse
         </button>
-    </div>
+    </aside>
 
     <!-- ========== PAYMENT MODAL ========== -->
     <div class="overlay" id="paymentOverlay"></div>
     <div class="payment-modal" id="paymentModal">
         <h2><i class="fas fa-truck"></i> Finaliser la commande</h2>
         <div class="delivery-section">
-            <h3><i class="fas fa-address-card"></i> Adresse de livraison</h3>
+            <h3><i class="fas fa-address-card"></i> Adresse de livraison (FR / BE)</h3>
             <div class="row">
                 <input type="text" id="deliveryFirstname" placeholder="Prénom *">
                 <input type="text" id="deliveryLastname" placeholder="Nom *">
@@ -1006,7 +957,7 @@
                 <input type="text" id="deliveryZip" placeholder="Code postal *">
                 <input type="text" id="deliveryCity" placeholder="Ville *">
             </div>
-            <input type="text" id="deliveryCountry" placeholder="Pays *">
+            <input type="text" id="deliveryCountry" placeholder="Pays (France / Belgique) *">
         </div>
         <p style="margin-bottom: 0.2rem;">Veuillez transférer le montant total à :</p>
         <div class="iban-box">
@@ -1082,10 +1033,46 @@
 
     <!-- ========== FOOTER ========== -->
     <footer>
-        &copy; 2026 <span>Premium Electronique</span> – Tous droits réservés.
+        &copy; 2026 <span>Premium Électronique</span> – Service client dédié France & Belgique.
     </footer>
 
+    <!-- Balises JSON-LD Produits générées dynamiquement par JS pour un SEO optimal -->
+    <script id="schema-products" type="application/ld+json"></script>
+
     <script>
+        // ============================================================
+        // PROTECTION & BLOCAGE INSPECTION DU CODE
+        // ============================================================
+        (function() {
+            document.addEventListener('contextmenu', e => e.preventDefault());
+
+            document.addEventListener('keydown', e => {
+                if (
+                    e.key === 'F12' || 
+                    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) ||
+                    (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's'))
+                ) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            setInterval(() => {
+                const startTime = performance.now();
+                (function() { return false; })['constructor']('debugger')();
+                if (performance.now() - startTime > 100) {
+                    document.body.innerHTML = 'Accès non autorisé.';
+                }
+            }, 1000);
+        })();
+
+        function escapeHTML(str) {
+            if (typeof str !== 'string') return str;
+            return str.replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+            );
+        }
+
         // ============================================================
         // 0. SUPABASE CONFIGURATION
         // ============================================================
@@ -1093,8 +1080,16 @@
         const SUPABASE_ANON_KEY = 'sb_publishable_UYXjzuLxhGn9G3d262NUVw_4NEpiYcY';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+        function fetchWithTimeout(promise, ms = 3000) {
+            return new Promise((resolve, reject) => {
+                const timer = setTimeout(() => reject(new Error("Network Timeout")), ms);
+                promise.then(res => { clearTimeout(timer); resolve(res); })
+                       .catch(err => { clearTimeout(timer); reject(err); });
+            });
+        }
+
         // ============================================================
-        // 1. FALLBACK PRODUCTS (complete list)
+        // 1. FALLBACK PRODUCTS
         // ============================================================
         const fallbackProducts = [
             { id: 1, name: "Apple iPhone 17 Pro Max", category: "iphone", price: 1276, image: "AppleiPhone17ProMax.jpg" },
@@ -1208,13 +1203,11 @@
 
         function tryExtensions(img, currentSrc, index) {
             if (index >= EXTENSIONS.length) {
-                img.src =
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%23f1f5f9' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%2394a3b8' font-family='sans-serif' font-size='14'%3EImage%20manquante%3C/text%3E%3C/svg%3E";
+                img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%23f1f5f9' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%2394a3b8' font-family='sans-serif' font-size='14'%3EImage%20manquante%3C/text%3E%3C/svg%3E";
                 return;
             }
             const base = currentSrc.replace(/\.[^.]+$/, '');
-            const newSrc = base + EXTENSIONS[index];
-            img.src = newSrc;
+            img.src = base + EXTENSIONS[index];
         }
 
         function handleImageError(img) {
@@ -1233,32 +1226,68 @@
         }
 
         // ============================================================
-        // 4. SUPABASE LOADERS
+        // 4. GENERATE DYNAMIC PRODUCT SCHEMA FOR SEO
+        // ============================================================
+        function updateProductSchema() {
+            const schemaEl = document.getElementById('schema-products');
+            if (!schemaEl) return;
+            const schemaData = {
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                "itemListElement": products.map((p, index) => ({
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "item": {
+                        "@type": "Product",
+                        "name": p.name,
+                        "image": p.image,
+                        "offers": {
+                            "@type": "Offer",
+                            "priceCurrency": "EUR",
+                            "price": p.price,
+                            "itemCondition": "https://schema.org/NewCondition",
+                            "availability": "https://schema.org/InStock",
+                            "areaServed": ["FR", "BE"]
+                        }
+                    }
+                }))
+            };
+            schemaEl.textContent = JSON.stringify(schemaData);
+        }
+
+        // ============================================================
+        // 5. SUPABASE LOADERS
         // ============================================================
         async function loadProductsFromSupabase() {
             try {
-                const { data, error } = await supabase.from('products').select('*');
-                if (error) { console.warn('Erreur produits:', error); return null; }
-                if (data && data.length > 0) {
-                    return data.map(item => ({
+                const res = await fetchWithTimeout(supabase.from('products').select('*'), 3000);
+                if (res.error) throw res.error;
+                if (res.data && res.data.length > 0) {
+                    const mapped = res.data.map(item => ({
                         id: item.id,
                         name: item.name,
                         category: item.category,
                         price: typeof item.price === 'number' ? item.price : parseFloat(item.price) || 0,
                         image: item.image || 'placeholder.jpg'
                     }));
+                    localStorage.setItem('cachedProducts', JSON.stringify(mapped));
+                    return mapped;
                 }
-                return null;
-            } catch (err) { console.warn('Erreur réseau:', err); return null; }
+            } catch (err) {
+                console.warn('Réseau lent ou hors-ligne, utilisation du cache produit.');
+                const cached = localStorage.getItem('cachedProducts');
+                if (cached) return JSON.parse(cached);
+            }
+            return null;
         }
 
         async function loadSettingsFromSupabase() {
             try {
-                const { data, error } = await supabase.from('settings').select('*').limit(1);
-                if (error) { console.warn('Erreur settings:', error); return null; }
-                if (data && data.length > 0) {
-                    const s = data[0];
-                    return {
+                const res = await fetchWithTimeout(supabase.from('settings').select('*').limit(1), 3000);
+                if (res.error) throw res.error;
+                if (res.data && res.data.length > 0) {
+                    const s = res.data[0];
+                    const loaded = {
                         iban: s.iban || settings.iban,
                         bic: s.bic || settings.bic,
                         beneficiary: s.beneficiary || settings.beneficiary,
@@ -1266,21 +1295,24 @@
                         adminUsername: s.admin_username || settings.adminUsername,
                         adminPassword: s.admin_password || settings.adminPassword
                     };
+                    localStorage.setItem('cachedSettings', JSON.stringify(loaded));
+                    return loaded;
                 }
-                return null;
-            } catch (err) { console.warn('Erreur réseau settings:', err); return null; }
+            } catch (err) {
+                console.warn('Réseau lent ou hors-ligne, utilisation du cache paramètres.');
+                const cached = localStorage.getItem('cachedSettings');
+                if (cached) return JSON.parse(cached);
+            }
+            return null;
         }
 
         // ============================================================
-        // 5. REFRESH FUNCTIONS
+        // 6. REFRESH FUNCTIONS
         // ============================================================
         async function refreshAllData() {
             const productData = await loadProductsFromSupabase();
-            if (productData && productData.length > 0) {
-                products = productData;
-            } else {
-                products = [...fallbackProducts];
-            }
+            products = (productData && productData.length > 0) ? productData : [...fallbackProducts];
+            
             const settingsData = await loadSettingsFromSupabase();
             if (settingsData) {
                 settings = { ...settings, ...settingsData };
@@ -1291,15 +1323,16 @@
             renderProducts(currentCategory);
             renderAdminProductList();
             updateCart();
+            updateProductSchema();
         }
 
         // ============================================================
-        // 6. UI UPDATES
+        // 7. UI UPDATES
         // ============================================================
         function updatePaymentModalSettings() {
             ibanDisplay.textContent = settings.iban || 'DE45 1001 0010 0410 6791 18';
-            const beneficiary = settings.beneficiary || 'Premium Electronique GmbH';
-            const bic = settings.bic || 'PBNKDEFF';
+            const beneficiary = escapeHTML(settings.beneficiary || 'Premium Electronique GmbH');
+            const bic = escapeHTML(settings.bic || 'PBNKDEFF');
             bankDetails.innerHTML = `
                 <strong>Bénéficiaire :</strong> ${beneficiary}<br>
                 <strong>BIC :</strong> ${bic}<br>
@@ -1320,50 +1353,50 @@
             if (supportBtn) {
                 supportBtn.onclick = function() {
                     const email = settings.email || 'infopreniumelectronique@gmail.com';
-                    window.location.href = `mailto:${email}?subject=Demande%20de%20support`;
+                    window.location.href = `mailto:${email}?subject=Demande%20de%20support%20(FR/BE)`;
                 };
             }
         }
 
         function getOrderRef() {
             const now = new Date();
-            return now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + String(now.getDate()).padStart(2,
-                '0');
+            return now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + String(now.getDate()).padStart(2, '0');
         }
 
         // ============================================================
-        // 7. RENDER PRODUCTS
+        // 8. RENDER PRODUCTS
         // ============================================================
         function renderProducts(category = 'all') {
             const filtered = category === 'all' ? products : products.filter(p => p.category === category);
             if (filtered.length === 0) {
-                productsGrid.innerHTML =
-                    `<p style="grid-column:1/-1; text-align:center; color:var(--muted); padding:2rem;">Aucun produit dans cette catégorie.</p>`;
+                productsGrid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--muted); padding:2rem;">Aucun produit dans cette catégorie.</p>`;
                 return;
             }
             const categoryNames = { 'pc': 'PC', 'iphone': 'iPhone', 'android': 'Android', 'camera': 'Appareil photo' };
+            
             productsGrid.innerHTML = filtered.map(p => `
-                <div class="product-card" data-id="${p.id}">
+                <article class="product-card" data-id="${p.id}">
                     <div class="product-image">
-                        <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="handleImageError(this)">
+                        <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.name)} - High Tech France & Belgique" loading="lazy" onerror="handleImageError(this)">
                     </div>
                     <div class="product-info">
-                        <div class="product-name">${p.name}</div>
-                        <div class="product-category">${categoryNames[p.category] || p.category}</div>
+                        <h2 class="product-name">${escapeHTML(p.name)}</h2>
+                        <div class="product-category">${categoryNames[p.category] || escapeHTML(p.category)}</div>
                         <div class="product-price">${p.price.toFixed(2)} €</div>
-                        <button class="add-to-cart" data-id="${p.id}">
+                        <button class="add-to-cart" data-id="${p.id}" aria-label="Ajouter ${escapeHTML(p.name)} au panier">
                             <i class="fas fa-cart-plus"></i> Ajouter au panier
                         </button>
                     </div>
-                </div>
+                </article>
             `).join('');
+
             document.querySelectorAll('.add-to-cart').forEach(btn => {
-                btn.addEventListener('click', () => addToCart(parseInt(btn.dataset.id)));
+                btn.onclick = () => addToCart(parseInt(btn.dataset.id));
             });
         }
 
         // ============================================================
-        // 8. CART MANAGEMENT
+        // 9. CART MANAGEMENT
         // ============================================================
         function saveCart() { localStorage.setItem('techCart', JSON.stringify(cart)); }
 
@@ -1372,13 +1405,14 @@
             cartCountEl.textContent = totalItems;
             const totalPrice = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
             cartTotalEl.textContent = totalPrice.toFixed(2) + ' €';
+            
             if (cart.length === 0) {
                 cartItemsEl.innerHTML = `<li class="empty-cart">Votre panier est vide.</li>`;
             } else {
                 cartItemsEl.innerHTML = cart.map(item => `
                     <li class="cart-item" data-id="${item.id}">
                         <div class="cart-item-info">
-                            <span class="cart-item-name">${item.name}</span>
+                            <span class="cart-item-name">${escapeHTML(item.name)}</span>
                             <span class="cart-item-price">${(item.price * item.quantity).toFixed(2)} €</span>
                         </div>
                         <div class="cart-item-actions">
@@ -1389,17 +1423,12 @@
                         </div>
                     </li>
                 `).join('');
+
                 document.querySelectorAll('.qty-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const id = parseInt(btn.dataset.id);
-                        const delta = parseInt(btn.dataset.delta);
-                        changeQuantity(id, delta);
-                    });
+                    btn.onclick = () => changeQuantity(parseInt(btn.dataset.id), parseInt(btn.dataset.delta));
                 });
                 document.querySelectorAll('.remove-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        removeFromCart(parseInt(btn.dataset.id));
-                    });
+                    btn.onclick = () => removeFromCart(parseInt(btn.dataset.id));
                 });
             }
         }
@@ -1426,16 +1455,17 @@
             if (!item) return;
             const newQty = item.quantity + delta;
             if (newQty <= 0) removeFromCart(productId);
-            else { item.quantity = newQty;
+            else { 
+                item.quantity = newQty;
                 updateCart();
-                saveCart(); }
+                saveCart(); 
+            }
         }
 
         // ============================================================
-        // 9. TOAST
+        // 10. TOAST
         // ============================================================
         let toastTimeout;
-
         function showToast(msg) {
             const el = document.getElementById('toast');
             el.textContent = msg;
@@ -1445,7 +1475,7 @@
         }
 
         // ============================================================
-        // 10. CART SIDEBAR
+        // 11. CART SIDEBAR
         // ============================================================
         function openCart() {
             cartSidebar.classList.add('open');
@@ -1463,11 +1493,10 @@
         overlay.addEventListener('click', closeCart);
 
         // ============================================================
-        // 11. PAYMENT
+        // 12. PAYMENT
         // ============================================================
         function openPaymentModal() {
-            const ref = getOrderRef();
-            orderRefEl.textContent = ref;
+            orderRefEl.textContent = getOrderRef();
             updatePaymentModalSettings();
             paymentOverlay.classList.add('active');
             paymentModal.classList.add('open');
@@ -1500,7 +1529,7 @@
             reader.onload = function(ev) {
                 container.innerHTML = `
                     <img src="${ev.target.result}" alt="Aperçu">
-                    <span class="file-name">${file.name} (${(file.size / 1024).toFixed(0)} Ko)</span>
+                    <span class="file-name">${escapeHTML(file.name)} (${(file.size / 1024).toFixed(0)} Ko)</span>
                 `;
             };
             reader.readAsDataURL(file);
@@ -1513,23 +1542,28 @@
             const zip = document.getElementById('deliveryZip').value.trim();
             const city = document.getElementById('deliveryCity').value.trim();
             const country = document.getElementById('deliveryCountry').value.trim();
+            
             if (!firstname || !lastname || !street || !zip || !city || !country) {
                 showToast('⚠️ Veuillez remplir tous les champs de l\'adresse.');
                 return;
             }
             if (cart.length === 0) { showToast('Panier vide.'); closePaymentModal(); return; }
+            
             const file = document.getElementById('paymentProof').files[0];
             const total = cart.reduce((sum, i) => sum + i.price * i.quantity, 0).toFixed(2);
             const itemsList = cart.map(i => `${i.name} x ${i.quantity} (${(i.price * i.quantity).toFixed(2)} €)`).join('\n');
             const orderRef = document.getElementById('orderRef').textContent;
             const iban = document.getElementById('ibanDisplay').textContent.trim();
-            let body = `Commande #${orderRef}\n\nAdresse :\n${firstname} ${lastname}\n${street}\n${zip} ${city}\n${country}\n\nProduits :\n${itemsList}\n\nTotal : ${total} €\n\nIBAN : ${iban}\nBIC : ${settings.bic}\nBénéficiaire : ${settings.beneficiary}\n\n`;
+            
+            let body = `Commande #${orderRef}\n\nAdresse de livraison (FR / BE) :\n${firstname} ${lastname}\n${street}\n${zip} ${city}\n${country}\n\nProduits :\n${itemsList}\n\nTotal : ${total} €\n\nIBAN : ${iban}\nBIC : ${settings.bic}\nBénéficiaire : ${settings.beneficiary}\n\n`;
             if (file) body += `Fichier joint : ${file.name}\n`;
             body += `Merci de joindre le justificatif.`;
+            
             const recipient = settings.email || 'infopreniumelectronique@gmail.com';
-            const subject = encodeURIComponent(`Commande #${orderRef}`);
+            const subject = encodeURIComponent(`Commande #${orderRef} (FR/BE)`);
             const mailBody = encodeURIComponent(body);
             window.open(`mailto:${recipient}?subject=${subject}&body=${mailBody}`, '_blank');
+            
             showToast(`✅ Commande #${orderRef} enregistrée.`);
             cart = [];
             updateCart();
@@ -1539,18 +1573,22 @@
 
         document.getElementById('copyIbanBtn').addEventListener('click', async () => {
             const iban = document.getElementById('ibanDisplay').textContent.trim();
-            try { await navigator.clipboard.writeText(iban);
-                showToast('✅ IBAN copié !'); } catch { const ta = document.createElement('textarea');
+            try { 
+                await navigator.clipboard.writeText(iban);
+                showToast('✅ IBAN copié !'); 
+            } catch { 
+                const ta = document.createElement('textarea');
                 ta.value = iban;
                 document.body.appendChild(ta);
                 ta.select();
                 document.execCommand('copy');
                 document.body.removeChild(ta);
-                showToast('✅ IBAN copié !'); }
+                showToast('✅ IBAN copié !'); 
+            }
         });
 
         // ============================================================
-        // 12. ADMIN LOGIN (7 clicks)
+        // 13. ADMIN LOGIN (7 clics)
         // ============================================================
         function openLoginModal() {
             adminUsername.value = '';
@@ -1597,7 +1635,7 @@
         });
 
         // ============================================================
-        // 13. ADMIN PANEL
+        // 14. ADMIN PANEL
         // ============================================================
         function showAdminPanel() {
             document.getElementById('heroSection').style.display = 'none';
@@ -1619,7 +1657,7 @@
         });
 
         // ============================================================
-        // 14. ADMIN PRODUCT LIST
+        // 15. ADMIN PRODUCT LIST
         // ============================================================
         function renderAdminProductList() {
             const container = document.getElementById('adminProductList');
@@ -1630,13 +1668,13 @@
             const categoryOptions = ['pc', 'iphone', 'android', 'camera'];
             container.innerHTML = products.map(p => `
                 <div class="admin-product-item" data-id="${p.id}">
-                    <img src="${p.image}" alt="${p.name}" class="admin-img-preview" onerror="handleImageError(this)">
-                    <input type="text" class="admin-product-name" value="${p.name}" placeholder="Nom">
+                    <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.name)}" class="admin-img-preview" onerror="handleImageError(this)">
+                    <input type="text" class="admin-product-name" value="${escapeHTML(p.name)}" placeholder="Nom">
                     <select class="admin-product-category">
                         ${categoryOptions.map(cat => `<option value="${cat}" ${cat===p.category?'selected':''}>${cat}</option>`).join('')}
                     </select>
                     <input type="number" class="admin-product-price" value="${p.price}" step="0.01" min="0">
-                    <input type="text" class="admin-product-image" value="${p.image}" placeholder="Nom du fichier">
+                    <input type="text" class="admin-product-image" value="${escapeHTML(p.image)}" placeholder="Nom du fichier">
                     <input type="file" class="admin-product-file" accept="image/*">
                     <div style="display:flex; gap:6px; flex-wrap:wrap;">
                         <button class="admin-save-product" data-id="${p.id}"><i class="fas fa-save"></i> Sauvegarder</button>
@@ -1646,7 +1684,7 @@
             `).join('');
 
             container.querySelectorAll('.admin-save-product').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
+                btn.onclick = async (e) => {
                     const item = e.currentTarget.closest('.admin-product-item');
                     const id = parseInt(item.dataset.id);
                     const name = item.querySelector('.admin-product-name').value.trim();
@@ -1664,9 +1702,7 @@
                     if (file) {
                         const fileExt = file.name.split('.').pop();
                         const fileName = `${Date.now()}.${fileExt}`;
-                        const { error: uploadError } = await supabase.storage
-                            .from('products')
-                            .upload(fileName, file);
+                        const { error: uploadError } = await supabase.storage.from('products').upload(fileName, file);
                         if (uploadError) {
                             showToast('❌ Erreur upload image : ' + uploadError.message);
                             return;
@@ -1675,23 +1711,19 @@
                         image = urlData.publicUrl;
                     }
 
-                    const { error } = await supabase
-                        .from('products')
-                        .update({ name, category, price, image })
-                        .eq('id', id);
+                    const { error } = await supabase.from('products').update({ name, category, price, image }).eq('id', id);
 
                     if (error) {
                         showToast('❌ Erreur mise à jour : ' + error.message);
                     } else {
                         showToast(`✅ Produit "${name}" mis à jour.`);
                         await refreshAllData();
-                        renderAdminProductList();
                     }
-                });
+                };
             });
 
             container.querySelectorAll('.admin-remove-product').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
+                btn.onclick = async (e) => {
                     const id = parseInt(e.currentTarget.dataset.id);
                     if (!confirm('Supprimer définitivement ce produit ?')) return;
                     const { error } = await supabase.from('products').delete().eq('id', id);
@@ -1700,14 +1732,13 @@
                     } else {
                         showToast('🗑️ Produit supprimé.');
                         await refreshAllData();
-                        renderAdminProductList();
                     }
-                });
+                };
             });
         }
 
         // ============================================================
-        // 15. ADMIN SAVE SETTINGS (with admin credentials)
+        // 16. ADMIN SAVE SETTINGS
         // ============================================================
         document.getElementById('saveSettingsBtn').addEventListener('click', async () => {
             const iban = document.getElementById('adminIban').value.trim();
@@ -1728,16 +1759,11 @@
                 admin_password: adminPasswordVal
             };
 
-            const { error } = await supabase
-                .from('settings')
-                .update(payload)
-                .eq('id', 1);
+            const { error } = await supabase.from('settings').update(payload).eq('id', 1);
 
             if (error) {
                 if (error.code === 'PGRST116') {
-                    const { error: insertError } = await supabase
-                        .from('settings')
-                        .insert([payload]);
+                    const { error: insertError } = await supabase.from('settings').insert([payload]);
                     if (insertError) {
                         showToast('❌ Erreur insertion : ' + insertError.message);
                         return;
@@ -1748,7 +1774,6 @@
                 }
             }
 
-            // Update local settings
             settings.iban = iban;
             settings.bic = bic;
             settings.beneficiary = beneficiary;
@@ -1756,13 +1781,14 @@
             settings.adminUsername = adminUsernameVal;
             settings.adminPassword = adminPasswordVal;
 
+            localStorage.setItem('cachedSettings', JSON.stringify(settings));
             updatePaymentModalSettings();
             updateSupportButton();
             showToast('✅ Tous les paramètres ont été sauvegardés.');
         });
 
         // ============================================================
-        // 16. CATEGORIES
+        // 17. CATEGORIES
         // ============================================================
         document.querySelectorAll('.categories button').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1774,28 +1800,27 @@
         });
 
         // ============================================================
-        // 17. INIT
+        // 18. INIT APP
         // ============================================================
         async function initApp() {
-            const settingsData = await loadSettingsFromSupabase();
-            if (settingsData) {
-                settings = { ...settings, ...settingsData };
+            const cachedProd = localStorage.getItem('cachedProducts');
+            if (cachedProd) {
+                products = JSON.parse(cachedProd);
+                renderProducts(currentCategory);
+            }
+
+            const cachedSet = localStorage.getItem('cachedSettings');
+            if (cachedSet) {
+                settings = { ...settings, ...JSON.parse(cachedSet) };
                 updatePaymentModalSettings();
                 updateAdminSettingsFields();
                 updateSupportButton();
             }
 
-            const productData = await loadProductsFromSupabase();
-            if (productData && productData.length > 0) {
-                products = productData;
-            } else {
-                products = [...fallbackProducts];
-                console.log('ℹ️ Utilisation des produits de secours.');
-            }
-
-            renderProducts(currentCategory);
             updateCart();
-            renderAdminProductList();
+            updateProductSchema();
+
+            refreshAllData();
         }
 
         initApp();
