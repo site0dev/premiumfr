@@ -850,6 +850,75 @@
             .product-price { font-size: 0.95rem; }
             .add-to-cart { font-size: 0.65rem; min-height: 34px; }
         }
+        .product-description {
+            font-size: 0.78rem;
+            line-height: 1.45;
+            color: var(--muted);
+            margin: 0.2rem 0 0.8rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .product-specs-preview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.35rem 0.55rem;
+            margin: 0 0 0.8rem;
+            font-size: 0.7rem;
+        }
+        .product-specs-preview span {
+            background: #f5f9f5;
+            border-radius: 7px;
+            padding: 0.35rem 0.45rem;
+            color: var(--text);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .product-details-btn {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--border);
+            padding: 0.55rem 0.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+        }
+        .product-details-btn:hover { border-color: var(--accent); background: #fef7ee; }
+
+        .product-details-modal {
+            position: fixed;
+            inset: 50% auto auto 50%;
+            transform: translate(-50%, -50%) scale(.96);
+            width: min(680px, 94%);
+            max-height: 90vh;
+            overflow-y: auto;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: 0 24px 80px rgba(0,0,0,.25);
+            z-index: 1150;
+            padding: 1.4rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: .25s ease;
+        }
+        .product-details-modal.open { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
+        .product-details-head { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; margin-bottom:.8rem; }
+        .product-details-head h2 { color:var(--primary); font-size:1.35rem; line-height:1.25; }
+        .close-product-details { border:0; background:transparent; font-size:1.8rem; color:#94a3b8; cursor:pointer; }
+        .product-details-description { color:var(--muted); margin-bottom:1rem; line-height:1.55; }
+        .spec-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:.65rem; }
+        .spec-item { border:1px solid var(--border); border-radius:12px; padding:.7rem; }
+        .spec-item strong { display:block; color:var(--primary); font-size:.72rem; text-transform:uppercase; letter-spacing:.04em; margin-bottom:.2rem; }
+        .spec-item span { font-size:.85rem; color:var(--text); line-height:1.4; }
+        @media (max-width:600px) {
+            .spec-grid { grid-template-columns:1fr; }
+            .product-specs-preview { font-size:.65rem; }
+        }
+
         .loading-spinner { grid-column: 1 / -1; text-align: center; padding: 3rem 0; color: var(--muted); }
         .loading-spinner i { font-size: 2rem; margin-bottom: 0.5rem; display: block; color: var(--primary); }
 
@@ -1028,6 +1097,17 @@
         </div>
     </div>
 
+    <!-- ========== PRODUCT DETAILS ========== -->
+    <div class="overlay" id="productDetailsOverlay"></div>
+    <div class="product-details-modal" id="productDetailsModal" role="dialog" aria-modal="true" aria-labelledby="productDetailsTitle">
+        <div class="product-details-head">
+            <h2 id="productDetailsTitle"></h2>
+            <button class="close-product-details" id="closeProductDetails" aria-label="Fermer">&times;</button>
+        </div>
+        <p class="product-details-description" id="productDetailsDescription"></p>
+        <div class="spec-grid" id="productSpecsGrid"></div>
+    </div>
+
     <!-- ========== TOAST ========== -->
     <div class="toast" id="toast"></div>
 
@@ -1091,6 +1171,560 @@
         // ============================================================
         // 1. FALLBACK PRODUCTS
         // ============================================================
+        // ============================================================
+        // FICHES TECHNIQUES PRODUITS
+        // ============================================================
+        const productSpecs = {
+            "Apple iPhone 17 Pro Max": {
+                        "version": "iOS 26",
+                        "ram": "12 Go",
+                        "rom": "256 Go / 512 Go / 1 To / 2 To",
+                        "ecran": "6,9\" OLED Super Retina XDR, ProMotion 120 Hz",
+                        "capteur": "48 MP Fusion + 48 MP ultra grand-angle + téléobjectif 48 MP; selfie 18 MP Center Stage",
+                        "charge": "USB‑C, recharge rapide, MagSafe jusqu’à 25 W",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth 6",
+                        "atouts": "IP68, Face ID, Apple Intelligence"
+            },
+            "Apple iPhone 17e": {
+                        "version": "iOS 26",
+                        "ram": "8 Go",
+                        "rom": "256 Go / 512 Go",
+                        "ecran": "6,1\" OLED Super Retina XDR",
+                        "capteur": "48 MP Fusion + téléobjectif 2x 12 MP; selfie 18 MP",
+                        "charge": "USB‑C, MagSafe 15 W, Qi2 15 W",
+                        "reseau": "5G, Wi‑Fi 6, Bluetooth 5.3",
+                        "atouts": "Face ID, IP68, Apple Intelligence"
+            },
+            "Apple iPhone 16e": {
+                        "version": "iOS 18",
+                        "ram": "8 Go",
+                        "rom": "128 Go / 256 Go / 512 Go",
+                        "ecran": "6,1\" OLED Super Retina XDR",
+                        "capteur": "48 MP Fusion + 12 MP 2x; selfie 12 MP",
+                        "charge": "USB‑C, recharge sans fil Qi",
+                        "reseau": "5G, Wi‑Fi 6, Bluetooth 5.3",
+                        "atouts": "Face ID, IP68, Apple Intelligence"
+            },
+            "Apple iPhone 17": {
+                        "version": "iOS 26",
+                        "ram": "8 Go",
+                        "rom": "256 Go / 512 Go",
+                        "ecran": "6,3\" OLED Super Retina XDR, ProMotion 120 Hz",
+                        "capteur": "48 MP principal + 48 MP ultra grand-angle; selfie 18 MP Center Stage",
+                        "charge": "USB‑C, MagSafe, Qi2",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth 6",
+                        "atouts": "Face ID, IP68, Apple Intelligence"
+            },
+            "Apple iPhone 17 Plus": {
+                        "version": "iOS 26",
+                        "ram": "8 Go",
+                        "rom": "256 Go / 512 Go",
+                        "ecran": "6,7\" OLED Super Retina XDR, 120 Hz",
+                        "capteur": "48 MP principal + 48 MP ultra grand-angle; selfie 18 MP",
+                        "charge": "USB‑C, MagSafe, Qi2",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth 6",
+                        "atouts": "Face ID, IP68, grande autonomie"
+            },
+            "Apple iPhone SE 4": {
+                        "version": "iOS",
+                        "ram": "8 Go",
+                        "rom": "128 Go / 256 Go / 512 Go",
+                        "ecran": "6,1\" OLED",
+                        "capteur": "48 MP principal; selfie 12 MP",
+                        "charge": "USB‑C, recharge sans fil",
+                        "reseau": "5G, Wi‑Fi 6, Bluetooth 5.3",
+                        "atouts": "Face ID, format compact, Apple Intelligence"
+            },
+            "Apple iPhone 16 Pro Max": {
+                        "version": "iOS 18",
+                        "ram": "8 Go",
+                        "rom": "256 Go / 512 Go / 1 To",
+                        "ecran": "6,9\" OLED Super Retina XDR, ProMotion 120 Hz",
+                        "capteur": "48 MP principal + 48 MP ultra grand-angle + téléobjectif 12 MP 5x; selfie 12 MP",
+                        "charge": "USB‑C USB 3, MagSafe 25 W",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth 5.3",
+                        "atouts": "LiDAR, Face ID, IP68, ProRes"
+            },
+            "Apple iPhone 12 Pro Max": {
+                        "version": "iOS 14 à iOS 26",
+                        "ram": "6 Go",
+                        "rom": "128 Go / 256 Go / 512 Go",
+                        "ecran": "6,7\" OLED Super Retina XDR",
+                        "capteur": "12 MP principal + 12 MP ultra grand-angle + téléobjectif 12 MP 2,5x; LiDAR",
+                        "charge": "Lightning, MagSafe 15 W",
+                        "reseau": "5G, Wi‑Fi 6, Bluetooth 5.0",
+                        "atouts": "Face ID, IP68, MagSafe"
+            },
+            "Samsung Galaxy S26 Ultra": {
+                        "version": "Android 16 / One UI 8",
+                        "ram": "12 Go / 16 Go",
+                        "rom": "256 Go / 512 Go / 1 To",
+                        "ecran": "6,9\" Dynamic AMOLED 2X, 120 Hz",
+                        "capteur": "200 MP principal + ultra grand-angle + téléobjectifs 3x/10x; selfie 12 MP",
+                        "charge": "USB‑C, charge rapide 60 W, sans fil",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth 6",
+                        "atouts": "S Pen, Galaxy AI, IP68"
+            },
+            "Samsung Galaxy Z Fold8 Ultra": {
+                        "version": "Android 16 / One UI",
+                        "ram": "16 Go",
+                        "rom": "512 Go / 1 To",
+                        "ecran": "Écran pliable AMOLED grand format, 120 Hz + écran externe",
+                        "capteur": "Triple caméra haut de gamme; selfie sous-écran/externe selon configuration",
+                        "charge": "USB‑C, recharge rapide, sans fil",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth",
+                        "atouts": "Grand écran pliable, multitâche, Galaxy AI"
+            },
+            "Samsung Galaxy Z Fold8": {
+                        "version": "Android 16 / One UI",
+                        "ram": "12 Go / 16 Go",
+                        "rom": "256 Go / 512 Go / 1 To",
+                        "ecran": "Écran pliable Dynamic AMOLED 2X, 120 Hz",
+                        "capteur": "Système photo multiple avec grand-angle, ultra grand-angle et téléobjectif",
+                        "charge": "USB‑C, recharge rapide et sans fil",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth",
+                        "atouts": "Multitâche, écran pliable, Galaxy AI"
+            },
+            "Samsung Galaxy Z Flip8": {
+                        "version": "Android 16 / One UI",
+                        "ram": "12 Go",
+                        "rom": "256 Go / 512 Go",
+                        "ecran": "Écran pliable AMOLED 120 Hz + écran de couverture",
+                        "capteur": "Double caméra arrière; caméra frontale pour selfies",
+                        "charge": "USB‑C, recharge rapide et sans fil",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth",
+                        "atouts": "Format compact pliable, FlexCam, Galaxy AI"
+            },
+            "Samsung Galaxy A57 5G": {
+                        "version": "Android 16 / One UI",
+                        "ram": "8 Go / 12 Go",
+                        "rom": "128 Go / 256 Go",
+                        "ecran": "AMOLED 6,7\" environ, 120 Hz",
+                        "capteur": "Triple caméra avec grand-angle haute résolution + ultra grand-angle + macro; selfie haute résolution",
+                        "charge": "USB‑C, charge rapide",
+                        "reseau": "5G, Wi‑Fi, Bluetooth",
+                        "atouts": "Grande autonomie, écran AMOLED, résistance à l’eau selon version"
+            },
+            "Samsung Galaxy A37": {
+                        "version": "Android 16 / One UI",
+                        "ram": "6 Go / 8 Go",
+                        "rom": "128 Go / 256 Go",
+                        "ecran": "AMOLED 6,6\" environ, 120 Hz",
+                        "capteur": "Triple caméra arrière; selfie haute résolution",
+                        "charge": "USB‑C, charge rapide",
+                        "reseau": "5G, Wi‑Fi, Bluetooth",
+                        "atouts": "Écran AMOLED, autonomie longue durée"
+            },
+            "Xiaomi 17 Ultra": {
+                        "version": "Android / HyperOS",
+                        "ram": "12 Go / 16 Go",
+                        "rom": "512 Go / 1 To",
+                        "ecran": "LTPO AMOLED 6,9\" environ, 120 Hz",
+                        "capteur": "Grand capteur principal Leica + ultra grand-angle + téléobjectif périscopique",
+                        "charge": "USB‑C, charge filaire et sans fil rapide",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth",
+                        "atouts": "Photo Leica, performances flagship"
+            },
+            "Xiaomi 17": {
+                        "version": "Android / HyperOS",
+                        "ram": "12 Go / 16 Go",
+                        "rom": "256 Go / 512 Go",
+                        "ecran": "AMOLED LTPO, 120 Hz",
+                        "capteur": "Triple caméra avec grand-angle, ultra grand-angle et téléobjectif",
+                        "charge": "USB‑C, charge rapide",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth",
+                        "atouts": "Format compact, hautes performances"
+            },
+            "Xiaomi Poco F9 Pro": {
+                        "version": "Android / HyperOS",
+                        "ram": "12 Go / 16 Go",
+                        "rom": "256 Go / 512 Go",
+                        "ecran": "AMOLED 120 Hz",
+                        "capteur": "Triple caméra arrière; selfie haute résolution",
+                        "charge": "USB‑C, charge rapide",
+                        "reseau": "5G, Wi‑Fi, Bluetooth",
+                        "atouts": "Performances gaming, refroidissement avancé"
+            },
+            "Xiaomi 15T Pro": {
+                        "version": "Android / HyperOS",
+                        "ram": "12 Go",
+                        "rom": "256 Go / 512 Go / 1 To",
+                        "ecran": "AMOLED LTPO 144 Hz",
+                        "capteur": "Triple caméra Leica avec téléobjectif; selfie 32 MP",
+                        "charge": "USB‑C, charge filaire rapide et sans fil",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth",
+                        "atouts": "Photo Leica, écran très fluide"
+            },
+            "Xiaomi Redmi Note 11": {
+                        "version": "Android / MIUI",
+                        "ram": "4 Go / 6 Go",
+                        "rom": "64 Go / 128 Go",
+                        "ecran": "AMOLED 6,43\", 90 Hz",
+                        "capteur": "108 MP principal + ultra grand-angle + macro + profondeur; selfie 13 MP",
+                        "charge": "USB‑C, charge rapide 33 W",
+                        "reseau": "4G, Wi‑Fi, Bluetooth",
+                        "atouts": "Excellent écran AMOLED, batterie 5000 mAh"
+            },
+            "Sony Xperia 1 VIII": {
+                        "version": "Android",
+                        "ram": "12 Go",
+                        "rom": "256 Go / 512 Go",
+                        "ecran": "OLED 4K/HDR, haute fréquence selon mode",
+                        "capteur": "Triple caméra Sony avec téléobjectif; selfie haute résolution",
+                        "charge": "USB‑C, charge rapide, recharge sans fil",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth",
+                        "atouts": "Photo/vidéo Sony, audio haute qualité, IP68"
+            },
+            "Sony Xperia 10 VII": {
+                        "version": "Android",
+                        "ram": "8 Go",
+                        "rom": "128 Go",
+                        "ecran": "OLED 6,1\", 120 Hz",
+                        "capteur": "Double caméra grand-angle + ultra grand-angle; selfie 8 MP",
+                        "charge": "USB‑C",
+                        "reseau": "5G, Wi‑Fi, Bluetooth",
+                        "atouts": "Format léger, autonomie, prise jack 3,5 mm"
+            },
+            "Google Pixel 11 Pro XL": {
+                        "version": "Android 17 / Pixel UI",
+                        "ram": "16 Go",
+                        "rom": "256 Go / 512 Go / 1 To",
+                        "ecran": "OLED LTPO 6,8\" environ, 120 Hz",
+                        "capteur": "Triple caméra Pixel Pro avec grand-angle, ultra grand-angle et téléobjectif; selfie haute résolution",
+                        "charge": "USB‑C, recharge rapide et sans fil",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth",
+                        "atouts": "Photo computationnelle, IA Google, mises à jour longues"
+            },
+            "Google Pixel 11 Pro Fold": {
+                        "version": "Android 17 / Pixel UI",
+                        "ram": "16 Go",
+                        "rom": "256 Go / 512 Go / 1 To",
+                        "ecran": "Double écran OLED pliable, 120 Hz",
+                        "capteur": "Système photo Pro multi-capteurs; caméra interne et externe",
+                        "charge": "USB‑C, recharge rapide et sans fil",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth",
+                        "atouts": "Format pliable, multitâche, IA Google"
+            },
+            "Google Pixel 10 Pro XL": {
+                        "version": "Android 16",
+                        "ram": "16 Go",
+                        "rom": "256 Go / 512 Go / 1 To",
+                        "ecran": "OLED LTPO 6,8\", 120 Hz",
+                        "capteur": "Triple caméra 50 MP + 48 MP ultra grand-angle + téléobjectif; selfie 42 MP",
+                        "charge": "USB‑C, recharge rapide, sans fil",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth",
+                        "atouts": "Photo computationnelle, Gemini, longue prise en charge logicielle"
+            },
+            "Google Pixel 10a": {
+                        "version": "Android 16",
+                        "ram": "8 Go",
+                        "rom": "128 Go / 256 Go",
+                        "ecran": "OLED 6,3\", 120 Hz",
+                        "capteur": "Double caméra avec principal haute résolution + ultra grand-angle; selfie",
+                        "charge": "USB‑C, recharge rapide, sans fil",
+                        "reseau": "5G, Wi‑Fi, Bluetooth",
+                        "atouts": "Très bon traitement photo, IA Google"
+            },
+            "Google Pixel 9a": {
+                        "version": "Android 15",
+                        "ram": "8 Go",
+                        "rom": "128 Go / 256 Go",
+                        "ecran": "OLED 6,3\", 120 Hz",
+                        "capteur": "48 MP principal + 13 MP ultra grand-angle; selfie 13 MP",
+                        "charge": "USB‑C, recharge rapide, sans fil",
+                        "reseau": "5G, Wi‑Fi, Bluetooth",
+                        "atouts": "Photo computationnelle, IP68, 7 ans de mises à jour"
+            },
+            "Oppo Find X9 Pro": {
+                        "version": "Android / ColorOS",
+                        "ram": "12 Go / 16 Go",
+                        "rom": "256 Go / 512 Go / 1 To",
+                        "ecran": "AMOLED LTPO, 120 Hz",
+                        "capteur": "Triple caméra haut de gamme avec téléobjectif périscopique",
+                        "charge": "USB‑C, charge filaire et sans fil rapide",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth",
+                        "atouts": "Photo avancée, autonomie et charge rapide"
+            },
+            "Vivo X300 Pro": {
+                        "version": "Android / OriginOS ou Funtouch OS selon marché",
+                        "ram": "12 Go / 16 Go",
+                        "rom": "256 Go / 512 Go / 1 To",
+                        "ecran": "AMOLED LTPO, 120 Hz",
+                        "capteur": "Triple caméra ZEISS avec téléobjectif périscopique",
+                        "charge": "USB‑C, charge filaire et sans fil rapide",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth",
+                        "atouts": "Photo ZEISS, performances haut de gamme"
+            },
+            "Honor Magic 8 Pro": {
+                        "version": "Android / MagicOS",
+                        "ram": "12 Go / 16 Go",
+                        "rom": "512 Go / 1 To",
+                        "ecran": "OLED LTPO, 120 Hz",
+                        "capteur": "Triple caméra avec grand capteur principal et téléobjectif périscopique",
+                        "charge": "USB‑C, charge rapide filaire et sans fil",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth",
+                        "atouts": "Photo, autonomie, fonctions IA"
+            },
+            "Honor Magic V6": {
+                        "version": "Android / MagicOS",
+                        "ram": "12 Go / 16 Go",
+                        "rom": "512 Go / 1 To",
+                        "ecran": "Double écran OLED pliable, 120 Hz",
+                        "capteur": "Triple caméra avec téléobjectif périscopique; caméras internes/externes",
+                        "charge": "USB‑C, charge rapide filaire et sans fil",
+                        "reseau": "5G, Wi‑Fi 7, Bluetooth",
+                        "atouts": "Très grand espace de travail, design pliable"
+            },
+            "Honor 400 Pro": {
+                        "version": "Android / MagicOS",
+                        "ram": "12 Go",
+                        "rom": "256 Go / 512 Go",
+                        "ecran": "AMOLED 120 Hz",
+                        "capteur": "Triple caméra haute résolution avec téléobjectif; selfie haute résolution",
+                        "charge": "USB‑C, charge rapide",
+                        "reseau": "5G, Wi‑Fi, Bluetooth",
+                        "atouts": "Photo détaillée, écran AMOLED"
+            },
+            "Motorola Razr Fold": {
+                        "version": "Android / Hello UX",
+                        "ram": "12 Go / 16 Go",
+                        "rom": "256 Go / 512 Go",
+                        "ecran": "Double écran pliable OLED, 120 Hz",
+                        "capteur": "Système photo multi-capteurs; caméra selfie interne/externe",
+                        "charge": "USB‑C, charge rapide, sans fil",
+                        "reseau": "5G, Wi‑Fi, Bluetooth",
+                        "atouts": "Format pliable, grand écran, multitâche"
+            },
+            "Motorola Edge 70 Fusion": {
+                        "version": "Android / Hello UX",
+                        "ram": "8 Go / 12 Go",
+                        "rom": "256 Go / 512 Go",
+                        "ecran": "pOLED 120 Hz",
+                        "capteur": "Caméra principale haute résolution + ultra grand-angle; selfie",
+                        "charge": "USB‑C, charge rapide",
+                        "reseau": "5G, Wi‑Fi, Bluetooth",
+                        "atouts": "Écran pOLED, design fin"
+            },
+            "Nothing Phone (3a) Pro": {
+                        "version": "Android / Nothing OS",
+                        "ram": "8 Go / 12 Go",
+                        "rom": "256 Go",
+                        "ecran": "AMOLED 6,77\", 120 Hz",
+                        "capteur": "50 MP principal + 50 MP téléobjectif 2x + 8 MP ultra grand-angle; selfie 50 MP",
+                        "charge": "USB‑C, charge rapide",
+                        "reseau": "5G, Wi‑Fi, Bluetooth",
+                        "atouts": "Interface Nothing OS, Glyph, téléobjectif"
+            },
+            "Nubia Air Pro": {
+                        "version": "Android / MyOS",
+                        "ram": "8 Go",
+                        "rom": "256 Go",
+                        "ecran": "AMOLED haute fréquence",
+                        "capteur": "Double/triple caméra selon configuration; selfie haute résolution",
+                        "charge": "USB‑C, charge rapide",
+                        "reseau": "5G/4G selon version, Wi‑Fi, Bluetooth",
+                        "atouts": "Design fin et écran fluide"
+            },
+            "Apple MacBook Neo": {
+                        "version": "macOS",
+                        "ram": "8 Go / 16 Go",
+                        "rom": "256 Go / 512 Go",
+                        "ecran": "13\" environ, écran Retina/Liquid Retina selon configuration",
+                        "capteur": "Caméra FaceTime HD",
+                        "charge": "USB‑C, recharge via adaptateur Apple",
+                        "reseau": "Wi‑Fi, Bluetooth",
+                        "atouts": "Silencieux, léger, autonomie élevée"
+            },
+            "Lenovo IdeaPad Slim 3": {
+                        "version": "Windows 11",
+                        "ram": "8 Go / 16 Go",
+                        "rom": "512 Go SSD",
+                        "ecran": "15,6\" Full HD selon configuration",
+                        "capteur": "Webcam HD 720p",
+                        "charge": "USB‑C + alimentation secteur",
+                        "reseau": "Wi‑Fi 6, Bluetooth",
+                        "atouts": "Bureautique, études, travail quotidien"
+            },
+            "Acer Swift Air 14": {
+                        "version": "Windows 11",
+                        "ram": "16 Go",
+                        "rom": "512 Go / 1 To SSD",
+                        "ecran": "14\" haute résolution",
+                        "capteur": "Webcam Full HD",
+                        "charge": "USB‑C Power Delivery",
+                        "reseau": "Wi‑Fi 6/7, Bluetooth",
+                        "atouts": "Très léger, mobilité, autonomie"
+            },
+            "Dell XPS 14": {
+                        "version": "Windows 11",
+                        "ram": "16 Go / 32 Go / 64 Go",
+                        "rom": "512 Go / 1 To SSD",
+                        "ecran": "14,5\" haute résolution",
+                        "capteur": "Webcam FHD/IR",
+                        "charge": "USB‑C Thunderbolt 4",
+                        "reseau": "Wi‑Fi 7, Bluetooth",
+                        "atouts": "Châssis premium, création et productivité"
+            },
+            "Apple MacBook Pro 14 M5 Pro": {
+                        "version": "macOS",
+                        "ram": "24 Go / 48 Go / 64 Go",
+                        "rom": "512 Go / 1 To / 2 To / 4 To",
+                        "ecran": "14,2\" Liquid Retina XDR, ProMotion 120 Hz",
+                        "capteur": "Caméra Center Stage 12 MP",
+                        "charge": "USB‑C/Thunderbolt, MagSafe 3",
+                        "reseau": "Wi‑Fi 7, Bluetooth",
+                        "atouts": "M5 Pro, création vidéo/photo, autonomie élevée"
+            },
+            "Lenovo Yoga Slim 7a": {
+                        "version": "Windows 11",
+                        "ram": "16 Go / 32 Go",
+                        "rom": "512 Go / 1 To SSD",
+                        "ecran": "14\" OLED/IPS selon configuration",
+                        "capteur": "Webcam Full HD/IR",
+                        "charge": "USB‑C Power Delivery",
+                        "reseau": "Wi‑Fi 6/7, Bluetooth",
+                        "atouts": "Mobilité, écran premium, polyvalence"
+            },
+            "MSI Prestige 16 AI+": {
+                        "version": "Windows 11",
+                        "ram": "32 Go / 64 Go",
+                        "rom": "1 To SSD",
+                        "ecran": "16\" haute résolution, 16:10",
+                        "capteur": "Webcam FHD/IR",
+                        "charge": "USB‑C Power Delivery + secteur",
+                        "reseau": "Wi‑Fi 7, Bluetooth",
+                        "atouts": "IA, création, productivité avancée"
+            },
+            "Schenker XMG Apex 17": {
+                        "version": "Windows 11",
+                        "ram": "16 Go / 32 Go / 64 Go",
+                        "rom": "1 To SSD ou plus",
+                        "ecran": "17,3\" haute fréquence",
+                        "capteur": "Webcam HD/FHD",
+                        "charge": "USB‑C selon configuration + secteur",
+                        "reseau": "Wi‑Fi, Bluetooth, Ethernet",
+                        "atouts": "Gaming, refroidissement renforcé, évolutivité"
+            },
+            "Chuwi CoreBook Air": {
+                        "version": "Windows 11",
+                        "ram": "8 Go / 16 Go",
+                        "rom": "256 Go / 512 Go SSD",
+                        "ecran": "14\" Full HD",
+                        "capteur": "Webcam HD",
+                        "charge": "USB‑C",
+                        "reseau": "Wi‑Fi, Bluetooth",
+                        "atouts": "Format léger, bureautique et études"
+            },
+            "Acer Nitro 18 AI": {
+                        "version": "Windows 11",
+                        "ram": "16 Go / 32 Go",
+                        "rom": "1 To SSD",
+                        "ecran": "18\" haute fréquence",
+                        "capteur": "Webcam HD/FHD",
+                        "charge": "USB‑C selon configuration + secteur",
+                        "reseau": "Wi‑Fi 6/7, Bluetooth, Ethernet",
+                        "atouts": "Gaming, grand écran, fonctions IA"
+            },
+            "Sony Alpha 7V": {
+                        "version": "Hybride plein format",
+                        "ram": "—",
+                        "rom": "SD/CFexpress selon configuration",
+                        "ecran": "Écran orientable haute résolution",
+                        "capteur": "Capteur plein format haute résolution, stabilisation 5 axes",
+                        "charge": "USB‑C",
+                        "reseau": "Wi‑Fi, Bluetooth",
+                        "atouts": "Photo/vidéo professionnelle, objectifs Sony E"
+            },
+            "Canon EOS R6 Mark III": {
+                        "version": "Hybride plein format",
+                        "ram": "—",
+                        "rom": "2 cartes mémoire selon configuration",
+                        "ecran": "Écran tactile orientable",
+                        "capteur": "Capteur plein format haute résolution, stabilisation 5 axes",
+                        "charge": "USB‑C + batterie dédiée",
+                        "reseau": "Wi‑Fi, Bluetooth",
+                        "atouts": "Autofocus avancé, photo sportive, vidéo 4K"
+            },
+            "Nikon Z6 III": {
+                        "version": "Hybride plein format",
+                        "ram": "—",
+                        "rom": "CFexpress/XQD + SD",
+                        "ecran": "Écran tactile orientable",
+                        "capteur": "Capteur plein format 24,5 MP partiellement empilé, stabilisation 5 axes",
+                        "charge": "USB‑C",
+                        "reseau": "Wi‑Fi, Bluetooth",
+                        "atouts": "Très bon équilibre photo/vidéo, autofocus avancé"
+            },
+            "Fujifilm X-T5": {
+                        "version": "Hybride APS‑C",
+                        "ram": "—",
+                        "rom": "SD UHS‑II double slot",
+                        "ecran": "Écran tactile inclinable",
+                        "capteur": "APS‑C X‑Trans CMOS 5 HR 40,2 MP, stabilisation 5 axes",
+                        "charge": "USB‑C",
+                        "reseau": "Wi‑Fi, Bluetooth",
+                        "atouts": "Excellente photo, simulations de films, compact"
+            },
+            "Leica Q3": {
+                        "version": "Compact plein format",
+                        "ram": "—",
+                        "rom": "SD + mémoire interne",
+                        "ecran": "Écran tactile inclinable",
+                        "capteur": "Plein format BSI CMOS 60,3 MP",
+                        "charge": "USB‑C",
+                        "reseau": "Wi‑Fi, Bluetooth",
+                        "atouts": "Objectif Summilux 28 mm, construction premium, photo haute résolution"
+            },
+            "Panasonic Lumix S5D": {
+                        "version": "Hybride plein format",
+                        "ram": "—",
+                        "rom": "Double slot SD",
+                        "ecran": "Écran tactile orientable",
+                        "capteur": "Plein format 24,2 MP, stabilisation 5 axes",
+                        "charge": "USB‑C",
+                        "reseau": "Wi‑Fi, Bluetooth",
+                        "atouts": "Vidéo 4K, polyvalence photo/vidéo"
+            },
+            "Fujifilm X100VI": {
+                        "version": "Compact APS‑C",
+                        "ram": "—",
+                        "rom": "SD + mémoire interne",
+                        "ecran": "Écran tactile inclinable",
+                        "capteur": "APS‑C X‑Trans CMOS 5 HR 40,2 MP, stabilisation 5 axes",
+                        "charge": "USB‑C",
+                        "reseau": "Wi‑Fi, Bluetooth",
+                        "atouts": "Objectif fixe 23 mm f/2, simulations de films, format compact"
+            },
+            "Sony Cyber-shot RX100 VII": {
+                        "version": "Compact expert",
+                        "ram": "—",
+                        "rom": "SD",
+                        "ecran": "Écran orientable",
+                        "capteur": "CMOS 1\" 20,1 MP, autofocus rapide",
+                        "charge": "USB‑C",
+                        "reseau": "Wi‑Fi, Bluetooth",
+                        "atouts": "Zoom 24‑200 mm, 4K, très compact"
+            }
+};
+
+        function getProductSpec(product) {
+            return productSpecs[product.name] || {
+                version: product.category === 'iphone' || product.category === 'android' ? 'Android / iOS selon modèle' : product.category === 'pc' ? 'Windows 11 / macOS selon modèle' : 'Appareil photo numérique',
+                ram: 'Selon configuration',
+                rom: 'Selon configuration',
+                ecran: 'Selon configuration',
+                capteur: product.category === 'camera' ? 'Capteur photo numérique selon modèle' : 'Caméra principale et caméra frontale selon configuration',
+                charge: product.category === 'camera' ? 'USB / batterie dédiée selon modèle' : 'USB‑C selon modèle',
+                reseau: product.category === 'camera' ? 'Wi‑Fi / Bluetooth selon modèle' : '4G/5G, Wi‑Fi et Bluetooth selon modèle',
+                atouts: 'Fonctions et équipement selon configuration'
+            };
+        }
+
+        function productDescription(product) {
+            const s = getProductSpec(product);
+            return `${product.name} : un modèle conçu pour offrir un bon équilibre entre performances, qualité d'affichage et fonctionnalités. Il propose ${s.ram !== '—' ? s.ram + ' de RAM et ' + s.rom + ' de stockage' : s.rom + " pour l'enregistrement"}. ${s.atouts}.`;
+        }
+
         const fallbackProducts = [
             { id: 1, name: "Apple iPhone 17 Pro Max", category: "iphone", price: 1276, image: "AppleiPhone17ProMax.jpg" },
             { id: 2, name: "Apple iPhone 17e", category: "iphone", price: 700, image: "AppleiPhone17e.jpg" },
@@ -1268,7 +1902,8 @@
                         name: item.name,
                         category: item.category,
                         price: typeof item.price === 'number' ? item.price : parseFloat(item.price) || 0,
-                        image: item.image || 'placeholder.jpg'
+                        image: item.image || 'placeholder.jpg',
+                        specs: productSpecs[item.name] || null
                     }));
                     localStorage.setItem('cachedProducts', JSON.stringify(mapped));
                     return mapped;
@@ -1373,8 +2008,10 @@
                 return;
             }
             const categoryNames = { 'pc': 'PC', 'iphone': 'iPhone', 'android': 'Android', 'camera': 'Appareil photo' };
-            
-            productsGrid.innerHTML = filtered.map(p => `
+
+            productsGrid.innerHTML = filtered.map(p => {
+                const spec = getProductSpec(p);
+                return `
                 <article class="product-card" data-id="${p.id}">
                     <div class="product-image">
                         <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.name)} - High Tech France & Belgique" loading="lazy" onerror="handleImageError(this)">
@@ -1382,18 +2019,69 @@
                     <div class="product-info">
                         <h2 class="product-name">${escapeHTML(p.name)}</h2>
                         <div class="product-category">${categoryNames[p.category] || escapeHTML(p.category)}</div>
+                        <p class="product-description">${escapeHTML(productDescription(p))}</p>
+                        <div class="product-specs-preview">
+                            <span title="Version"><strong>Version :</strong> ${escapeHTML(spec.version)}</span>
+                            <span title="RAM"><strong>RAM :</strong> ${escapeHTML(spec.ram)}</span>
+                            <span title="Stockage"><strong>ROM :</strong> ${escapeHTML(spec.rom)}</span>
+                            <span title="Capteur"><strong>Capteur :</strong> ${escapeHTML(spec.capteur)}</span>
+                        </div>
                         <div class="product-price">${p.price.toFixed(2)} €</div>
+                        <button class="product-details-btn" data-id="${p.id}" aria-label="Voir les caractéristiques de ${escapeHTML(p.name)}">
+                            <i class="fas fa-list-ul"></i> Voir les caractéristiques
+                        </button>
                         <button class="add-to-cart" data-id="${p.id}" aria-label="Ajouter ${escapeHTML(p.name)} au panier">
                             <i class="fas fa-cart-plus"></i> Ajouter au panier
                         </button>
                     </div>
                 </article>
-            `).join('');
+            `;
+            }).join('');
 
             document.querySelectorAll('.add-to-cart').forEach(btn => {
                 btn.onclick = () => addToCart(parseInt(btn.dataset.id));
             });
+            document.querySelectorAll('.product-details-btn').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    openProductDetails(parseInt(btn.dataset.id));
+                };
+            });
         }
+
+        function openProductDetails(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            const spec = getProductSpec(product);
+            document.getElementById('productDetailsTitle').textContent = product.name;
+            document.getElementById('productDetailsDescription').textContent = productDescription(product);
+            const fields = [
+                ['Version / système', spec.version],
+                ['RAM', spec.ram],
+                ['Stockage (ROM)', spec.rom],
+                ['Écran', spec.ecran],
+                ['Capteur / appareil photo', spec.capteur],
+                ['Charge / connecteur', spec.charge],
+                ['Réseau / connectivité', spec.reseau],
+                ['Points clés', spec.atouts]
+            ];
+            document.getElementById('productSpecsGrid').innerHTML = fields.map(([label, value]) => `
+                <div class="spec-item">
+                    <strong>${escapeHTML(label)}</strong>
+                    <span>${escapeHTML(value)}</span>
+                </div>
+            `).join('');
+            document.getElementById('productDetailsModal').classList.add('open');
+            document.getElementById('productDetailsOverlay').classList.add('active');
+        }
+
+        function closeProductDetails() {
+            document.getElementById('productDetailsModal').classList.remove('open');
+            document.getElementById('productDetailsOverlay').classList.remove('active');
+        }
+
+        document.getElementById('closeProductDetails').addEventListener('click', closeProductDetails);
+        document.getElementById('productDetailsOverlay').addEventListener('click', closeProductDetails);
 
         // ============================================================
         // 9. CART MANAGEMENT
