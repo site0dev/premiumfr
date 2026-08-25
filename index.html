@@ -1862,30 +1862,89 @@
         // ============================================================
         // 4. GENERATE DYNAMIC PRODUCT SCHEMA FOR SEO
         // ============================================================
+        function absoluteProductImage(image) {
+            if (!image) return '';
+            try { return new URL(image, window.location.origin + '/').href; }
+            catch { return image; }
+        }
+
+        function productBrand(name) {
+            const brands = ['Apple','Samsung','Xiaomi','Sony','Google','Oppo','Vivo','Honor','Motorola','Nothing','Nubia','Lenovo','Acer','Dell','MSI','Schenker','Chuwi','Canon','Nikon','Fujifilm','Leica','Panasonic'];
+            return brands.find(b => name.startsWith(b)) || 'TechShop Europe';
+        }
+
+        function productSchema(p) {
+            const description = productDescription(p);
+            const image = absoluteProductImage(p.image);
+            const product = {
+                "@type": "Product",
+                "name": p.name,
+                "description": description,
+                "image": image ? [image] : undefined,
+                "sku": String(p.sku || p.id),
+                "brand": { "@type": "Brand", "name": productBrand(p.name) },
+                "category": p.category,
+                "offers": {
+                    "@type": "Offer",
+                    "url": window.location.href.split('#')[0],
+                    "priceCurrency": "EUR",
+                    "price": Number(p.price),
+                    "itemCondition": "https://schema.org/NewCondition",
+                    "availability": "https://schema.org/InStock",
+                    "seller": { "@type": "Organization", "name": "TechShop Europe" },
+                    "areaServed": [
+                        { "@type": "Country", "name": "France" },
+                        { "@type": "Country", "name": "Belgium" }
+                    ]
+                }
+            };
+
+            // Ratings/reviews are added only when real data exists. Never invent them.
+            if (p.aggregateRating && Number(p.aggregateRating.ratingValue) > 0 && Number(p.aggregateRating.reviewCount || p.aggregateRating.ratingCount) > 0) {
+                product.aggregateRating = {
+                    "@type": "AggregateRating",
+                    "ratingValue": Number(p.aggregateRating.ratingValue),
+                    "reviewCount": Number(p.aggregateRating.reviewCount || p.aggregateRating.ratingCount)
+                };
+            }
+            if (Array.isArray(p.review)) {
+                const reviews = p.review.filter(r => r && r.author && r.reviewBody && r.reviewRating);
+                if (reviews.length) {
+                    product.review = reviews.map(r => ({
+                        "@type": "Review",
+                        "author": { "@type": "Person", "name": String(r.author) },
+                        "reviewBody": String(r.reviewBody),
+                        "reviewRating": {
+                            "@type": "Rating",
+                            "ratingValue": Number(r.reviewRating.ratingValue)
+                        }
+                    }));
+                }
+            }
+            return product;
+        }
+
         function updateProductSchema() {
             const schemaEl = document.getElementById('schema-products');
-            if (!schemaEl) return;
+            if (!schemaEl || !Array.isArray(products) || !products.length) return;
+
+            const productNodes = products.map(productSchema);
             const schemaData = {
                 "@context": "https://schema.org",
-                "@type": "ItemList",
-                "itemListElement": products.map((p, index) => ({
-                    "@type": "ListItem",
-                    "position": index + 1,
-                    "item": {
-                        "@type": "Product",
-                        "name": p.name,
-                        "image": p.image,
-                        "offers": {
-                            "@type": "Offer",
-                            "priceCurrency": "EUR",
-                            "price": p.price,
-                            "itemCondition": "https://schema.org/NewCondition",
-                            "availability": "https://schema.org/InStock",
-                            "areaServed": ["FR", "BE"]
-                        }
+                "@graph": [
+                    {
+                        "@type": "ItemList",
+                        "name": "Produits TechShop Europe",
+                        "numberOfItems": productNodes.length,
+                        "itemListElement": productNodes.map((product, index) => ({
+                            "@type": "ListItem",
+                            "position": index + 1,
+                            "item": product
+                        }))
                     }
-                }))
+                ]
             };
+
             schemaEl.textContent = JSON.stringify(schemaData);
         }
 
